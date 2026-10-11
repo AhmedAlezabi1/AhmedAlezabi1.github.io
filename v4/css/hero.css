@@ -1,0 +1,40 @@
+/* v4 = the original site (v1) with only the hero replaced by v3's look:
+   navy glow + blueprint grid + interactive 3D point wave (../v3/js/wave.js), aqua accents.
+   Everything below the hero keeps v1's black and lime styling. */
+
+.hero {
+  --hero-accent: #5eead4;
+  background:
+    radial-gradient(60% 38% at 50% 72%, rgba(94, 234, 212, 0.10), transparent 70%),
+    radial-gradient(45% 30% at 70% 62%, rgba(129, 140, 248, 0.12), transparent 70%),
+    radial-gradient(40% 28% at 30% 66%, rgba(168, 85, 247, 0.08), transparent 70%),
+    linear-gradient(rgba(148, 170, 255, 0.04) 1px, transparent 1px) 0 0 / 64px 64px,
+    linear-gradient(90deg, rgba(148, 170, 255, 0.04) 1px, transparent 1px) 0 0 / 64px 64px,
+    radial-gradient(1200px 700px at 50% -10%, #0c1430 0%, transparent 70%),
+    #050813;
+  padding: 100px 0 64px;
+}
+/* Fade the hero into v1's black page below */
+.hero::after { height: 260px; background: linear-gradient(transparent, var(--bg)); }
+
+/* Wave canvas */
+#smoke { opacity: 1; -webkit-mask-image: linear-gradient(transparent 0%, #000 22%, #000 88%, transparent 100%); mask-image: linear-gradient(transparent 0%, #000 22%, #000 88%, transparent 100%); }
+
+/* Hero scale and colours as in v3 */
+.hero-inner { margin-top: -6vh; }
+.hero h1 { font-size: clamp(40px, 6.6vw, 88px); margin: 22px auto 20px; max-width: 900px; text-shadow: 0 8px 60px rgba(5, 8, 19, 0.9); }
+.hero h1 em { -webkit-text-stroke-color: rgba(214, 255, 248, 0.85); }
+.hero p { font-size: 16px; max-width: 520px; color: #c3cbe3; text-shadow: 0 2px 24px rgba(5, 8, 19, 0.9); }
+.hero .pill { font-size: 12.5px; padding: 7px 14px; background: rgba(8, 13, 28, 0.62); border-color: rgba(148, 170, 255, 0.24); color: #dbe2ff; }
+.hero .pulse { background: var(--hero-accent); }
+.hero .pulse::after { border-color: var(--hero-accent); }
+.hero .hero-actions { margin-top: 28px; }
+.hero .btn { padding: 10px 19px; font-size: 13.5px; background: rgba(148, 170, 255, 0.04); }
+.hero .btn:hover { background: rgba(148, 170, 255, 0.09); border-color: rgba(148, 170, 255, 0.45); }
+.hero .btn-primary { background: #eef2ff; color: #050813; border-color: #eef2ff; box-shadow: 0 0 30px rgba(94, 234, 212, 0.18); }
+.hero .btn-primary:hover { background: #fff; box-shadow: 0 0 44px rgba(94, 234, 212, 0.35); }
+.hero .scroll-hint { margin-top: 52px; color: #94a0bf; }
+.hero .scroll-hint .line { background: rgba(148, 170, 255, 0.22); }
+.hero .marquee { margin-top: 44px; }
+.hero .marquee-track span { color: #8d99ba; }
+.hero .marquee-track img { filter: invert(0.62) sepia(0.2) hue-rotate(190deg); }
