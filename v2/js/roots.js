@@ -9,6 +9,9 @@
   const INK = css.getPropertyValue("--ink").trim() || "#121212";
   const PAPER = css.getPropertyValue("--plate").trim() || "#f7f5f0";
   const ACCENT = css.getPropertyValue("--accent").trim() || "#ff5a1f";
+  const v = (name, fallback) => css.getPropertyValue(name).trim() || fallback;
+  const LABEL = v("--plate-label", "rgba(18,18,18,0.38)"), GUIDE = v("--plate-guide", "rgba(18,18,18,0.07)");
+  const TAG_BG = v("--plate-tag-bg", "rgba(18,18,18,0.88)"), TAG_FG = v("--plate-tag-fg", "#fff");
   const LANES = 5;
   const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
   let W = 0, H = 0, dpr = 1, roots = [], phase = "grow", phaseT = 0, seed = 1, pointer = null, statusEl = document.getElementById("plateStatus");
@@ -84,8 +87,8 @@
     oc.font = "500 10px 'JetBrains Mono', monospace"; oc.textAlign = "center";
     for (let i = 0; i < LANES; i++) {
       const x = W * (i + 0.5) / LANES;
-      oc.fillStyle = "rgba(18,18,18,0.38)"; oc.fillText(`LANE ${i}`, x, H * 0.07);
-      if (i) { oc.strokeStyle = "rgba(18,18,18,0.07)"; oc.setLineDash([3, 5]); oc.beginPath(); oc.moveTo(W * i / LANES, H * 0.1); oc.lineTo(W * i / LANES, H * 0.96); oc.stroke(); oc.setLineDash([]); }
+      oc.fillStyle = LABEL; oc.fillText(`LANE ${i}`, x, H * 0.07);
+      if (i) { oc.strokeStyle = GUIDE; oc.setLineDash([3, 5]); oc.beginPath(); oc.moveTo(W * i / LANES, H * 0.1); oc.lineTo(W * i / LANES, H * 0.96); oc.stroke(); oc.setLineDash([]); }
     }
     if (phase === "grow") return;
     // "Model output": trace main root and mark its tip
@@ -95,7 +98,7 @@
       if (t <= 0) return;
       const x = W * (i + 0.5) / LANES;
       if (b.empty) {
-        oc.globalAlpha = t; oc.fillStyle = "rgba(18,18,18,0.45)"; oc.fillText("no root", x, H * 0.5); oc.globalAlpha = 1; return;
+        oc.globalAlpha = t; oc.fillStyle = LABEL; oc.fillText("no root", x, H * 0.5); oc.globalAlpha = 1; return;
       }
       const n = Math.floor((b.pts.length - 1) * t);
       oc.strokeStyle = ACCENT; oc.lineWidth = 1.6; oc.globalAlpha = 0.85;
@@ -111,8 +114,8 @@
         const label = `${Math.round(tx * 2.9)}, ${Math.round(ty * 2.9)} · ${conf}%`;
         oc.font = "500 10px 'JetBrains Mono', monospace";
         const w = oc.measureText(label).width + 12, lx = Math.min(Math.max(tx - w / 2, 4), W - w - 4), ly = Math.min(ty + 18, H - 22);
-        oc.fillStyle = "rgba(18,18,18,0.88)"; oc.beginPath(); oc.roundRect(lx, ly, w, 17, 4); oc.fill();
-        oc.fillStyle = "#fff"; oc.textAlign = "left"; oc.fillText(label, lx + 6, ly + 12); oc.textAlign = "center";
+        oc.fillStyle = TAG_BG; oc.beginPath(); oc.roundRect(lx, ly, w, 17, 4); oc.fill();
+        oc.fillStyle = TAG_FG; oc.textAlign = "left"; oc.fillText(label, lx + 6, ly + 12); oc.textAlign = "center";
       }
     });
   }

@@ -1,0 +1,98 @@
+/* v3 = v2's layout and features with v1's dark look.
+   Loaded after ../v2/css/style.css and only overrides what changes. */
+:root {
+  --paper: #050505;
+  --paper-2: #101010;
+  --plate: #0a0a0a;
+  --ink: #f3f3f3;
+  --ink-2: #c4c4c4;
+  --muted: #8d8d8d;
+  --line: rgba(255, 255, 255, 0.1);
+  --line-soft: rgba(255, 255, 255, 0.06);
+  --rule: rgba(255, 255, 255, 0.28);
+  --accent: #c8ff5a;
+  --serif: "Inter Tight", "Inter", system-ui, sans-serif;
+  /* root-detection plate */
+  --plate-label: rgba(255, 255, 255, 0.34);
+  --plate-guide: rgba(255, 255, 255, 0.06);
+  --plate-tag-bg: rgba(200, 255, 90, 0.95);
+  --plate-tag-fg: #050505;
+}
+
+body::before { display: none; } /* paper grain belongs to the light theme */
+::selection { background: var(--accent); color: #000; }
+
+/* Display type: v1's light Inter Tight, with outlined emphasis */
+.hero h1, .sec-head h2, .row h3, .about-body .big, .principle h3, .principle .k, .ticker-item b,
+.contact h2, .cs h2, .cs-metrics b, .cs-next button, .monogram { font-weight: 300; }
+.hero h1 { font-size: clamp(52px, 8.6vw, 136px); line-height: 0.95; letter-spacing: -0.05em; }
+.sec-head h2 { letter-spacing: -0.045em; }
+.hero h1 em, .sec-head h2 em, .contact h2 em {
+  font-style: normal; color: transparent; -webkit-text-stroke: 1.2px rgba(255, 255, 255, 0.8);
+}
+.contact h2 em { -webkit-text-stroke-color: var(--accent); }
+.about-body .big { font-size: clamp(26px, 2.6vw, 38px); letter-spacing: -0.03em; line-height: 1.2; }
+.about-body .big em { font-style: normal; color: var(--accent); }
+.row h3 { letter-spacing: -0.035em; }
+.principle .k { font-style: normal; font-weight: 200; }
+
+/* Hero band with the v1 smoke behind it */
+.hero-band { position: relative; overflow: hidden; border-bottom: 1px solid var(--line); }
+.hero-band #smoke { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.55; z-index: 0; pointer-events: none; }
+.hero-band::after { content: ""; position: absolute; inset: auto 0 0 0; height: 160px; background: linear-gradient(transparent, var(--paper)); pointer-events: none; z-index: 1; }
+.hero-band .hero { position: relative; z-index: 2; }
+.hero-label { color: #d8d8d8; }
+.hero-label.pill { display: inline-flex; padding: 7px 14px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, 0.18); background: rgba(10, 10, 10, 0.6); backdrop-filter: blur(8px); }
+.dot { box-shadow: 0 0 12px var(--accent); }
+.plate { border-color: rgba(255, 255, 255, 0.14); box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.02) inset, 0 40px 80px -40px rgba(0, 0, 0, 0.9), 0 0 60px -30px rgba(200, 255, 90, 0.25); background: rgba(10, 10, 10, 0.82); backdrop-filter: blur(6px); }
+
+/* Strong rules were solid ink in the light theme; soften them on black */
+.hero-facts, .index, .matrix thead th, .exp, .principles, .cs-facts, .cs-next { border-color: var(--rule) !important; }
+
+/* Buttons */
+.btn { border-color: rgba(255, 255, 255, 0.22); }
+.btn-ink { background: var(--ink); color: #000; border-color: var(--ink); box-shadow: 0 0 30px rgba(255, 255, 255, 0.1); }
+.btn-ink:hover { background: var(--accent); border-color: var(--accent); color: #000; box-shadow: 0 0 34px rgba(200, 255, 90, 0.35); }
+.btn-line:hover { background: rgba(255, 255, 255, 0.08); color: var(--ink); border-color: rgba(255, 255, 255, 0.45); }
+
+/* Ticker: dark band instead of inverted ink band */
+.ticker { background: #0b0b0b; color: var(--ink); border-color: var(--line); }
+.ticker-item { border-right-color: var(--line); }
+.ticker-item span { color: var(--muted); }
+.ticker-item b { color: var(--ink); }
+
+/* Project index: hover fills with a dark card and the accent arrow */
+.row::before { background: linear-gradient(90deg, #121212, #0d0d0d); border-radius: 14px; }
+.row:hover, .row:focus-visible { color: var(--ink); }
+.row:hover h3 { color: #fff; }
+.row:hover .muted, .row:focus-visible .muted { color: #a8a8a8; }
+.row:hover .go { color: #000; }
+.preview { box-shadow: 0 30px 70px -20px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255, 255, 255, 0.08); }
+
+/* Matrix */
+.mdot { border-color: rgba(255, 255, 255, 0.7); }
+.mdot.full { background: var(--ink); border-color: var(--ink); }
+.mdot.half { background: linear-gradient(90deg, var(--ink) 50%, transparent 50%); }
+.matrix tbody tr:hover { background: #0e0e0e; }
+.matrix tbody tr:hover .mdot.full { box-shadow: 0 0 12px rgba(200, 255, 90, 0.6); }
+
+/* About */
+.portrait-frame { background: radial-gradient(110% 80% at 30% 20%, #1e1e1e, #070707); border: 1px dashed rgba(255, 255, 255, 0.18); }
+.monogram { font-style: normal; font-weight: 200; color: transparent; -webkit-text-stroke: 1px rgba(255, 255, 255, 0.55); }
+.exp-row:hover { background: rgba(255, 255, 255, 0.02); }
+
+/* Contact keeps the dark band but separates it with a glow */
+.contact { background: #070707; color: var(--ink); border-top: 1px solid var(--line); position: relative; overflow: hidden; }
+.contact::before { content: ""; position: absolute; left: 50%; top: 40%; width: 900px; height: 420px; transform: translate(-50%, -50%); background: radial-gradient(closest-side, rgba(200, 255, 90, 0.09), transparent); pointer-events: none; }
+.contact .shell { position: relative; }
+
+/* Case-study drawer */
+.drawer { background: #080808; border-left: 1px solid var(--line); box-shadow: -40px 0 90px -30px rgba(0, 0, 0, 0.95); }
+.drawer-bar { background: rgba(8, 8, 8, 0.85); }
+.scrim { background: rgba(0, 0, 0, 0.6); }
+.close { border-color: rgba(255, 255, 255, 0.3); }
+.close:hover { background: var(--accent); color: #000; border-color: var(--accent); }
+.cs-gallery figcaption { background: #0c0c0c; }
+.chip { background: #111; border-color: var(--line); }
+.cs-sec ol li::before { color: var(--accent); }
+.cs-cover:not(.logo) { background: #000; }
