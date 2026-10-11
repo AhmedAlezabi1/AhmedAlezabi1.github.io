@@ -65,3 +65,138 @@
 .cs-cover, .gallery figure { background: #070c18; }
 .metric { background: var(--card); }
 .lightbox { background: rgba(3, 5, 12, 0.94); }
+
+/* =====================================================================
+   Refresh: slightly "zoomed out" scale + ambient background everywhere
+   ===================================================================== */
+
+/* ---------- Scale: ~15% smaller and calmer ---------- */
+:root { --max: 1160px; --radius: 16px; }
+body { font-size: 15px; }
+.nav .wrap { height: 64px; }
+.brand { font-size: 17px; }
+.nav-links { font-size: 13.5px; gap: 26px; }
+.btn { padding: 10px 19px; font-size: 13.5px; }
+.section { padding: 96px 0; }
+.eyebrow { font-size: 12px; margin-bottom: 14px; }
+.h2 { font-size: clamp(32px, 4.4vw, 54px); }
+.lead { font-size: 15.5px; max-width: 520px; }
+.section-head { margin-bottom: 44px; }
+.hero { padding: 100px 0 64px; }
+.hero h1 { font-size: clamp(40px, 6.6vw, 88px); margin: 22px auto 20px; max-width: 900px; }
+.hero p { font-size: 16px; max-width: 520px; }
+.hero-actions { margin-top: 28px; }
+.scroll-hint { margin-top: 52px; }
+.marquee { margin-top: 44px; }
+.pill { font-size: 12.5px; padding: 7px 14px; }
+.grid { gap: 16px; }
+.card-body { padding: 18px 20px 22px; }
+.card h3 { font-size: 19px; }
+.card p { font-size: 14px; }
+.case-pill { font-size: 12.5px; padding: 10px; }
+.about { gap: 56px; }
+.about .bio { font-size: 15.5px; }
+.chips { margin: 24px 0; padding: 22px 0; }
+.chip { font-size: 12.5px; }
+.tl-row { font-size: 13.5px; padding: 13px 4px; }
+.photo { max-width: 440px; justify-self: end; width: 100%; }
+.stat { padding: 28px 24px; }
+.stat b { font-size: clamp(34px, 4vw, 48px); }
+.stat span { font-size: 13.5px; }
+.services { gap: 16px; }
+.service { padding: 24px 22px 26px; }
+.service h3 { font-size: 18px; }
+.service p { font-size: 14px; }
+.contact .h2 { font-size: clamp(40px, 6.6vw, 88px); }
+.cs-hero { padding: 120px 0 48px; }
+.cs-hero h1 { font-size: clamp(36px, 5.6vw, 72px); }
+.cs-hero .tagline { font-size: clamp(16px, 1.7vw, 19px); }
+.cs-meta { margin-top: 42px; }
+.metrics { margin-top: 48px; gap: 16px; }
+.metric { padding: 26px 22px; }
+.metric b { font-size: clamp(32px, 3.8vw, 46px); }
+.cs-block { padding: 52px 0; grid-template-columns: 220px 1fr; }
+.cs-block h2 { font-size: 22px; }
+.cs-block p, .cs-block li { font-size: 15.5px; }
+.next a.big { font-size: clamp(24px, 3.6vw, 42px); }
+
+/* ---------- Ambient background: grid + drifting aurora glows + grain ---------- */
+html {
+  background:
+    linear-gradient(rgba(148, 170, 255, 0.035) 1px, transparent 1px) 0 0 / 64px 64px,
+    linear-gradient(90deg, rgba(148, 170, 255, 0.035) 1px, transparent 1px) 0 0 / 64px 64px,
+    radial-gradient(1200px 700px at 50% -10%, #0c1430 0%, transparent 70%),
+    var(--bg);
+}
+body { background: transparent; }
+body::before {
+  content: ""; position: fixed; inset: -25%; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(38% 30% at 18% 30%, rgba(94, 234, 212, 0.10), transparent 70%),
+    radial-gradient(34% 32% at 82% 22%, rgba(129, 140, 248, 0.13), transparent 70%),
+    radial-gradient(40% 34% at 60% 78%, rgba(168, 85, 247, 0.09), transparent 70%),
+    radial-gradient(30% 26% at 25% 85%, rgba(56, 189, 248, 0.07), transparent 70%);
+  filter: blur(20px);
+  animation: drift 38s ease-in-out infinite alternate;
+}
+@keyframes drift {
+  0%   { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
+  50%  { transform: translate3d(-4%, 3%, 0) rotate(8deg) scale(1.06); }
+  100% { transform: translate3d(3%, -2%, 0) rotate(-6deg) scale(1.02); }
+}
+body::after {
+  content: ""; position: fixed; inset: 0; z-index: 90; pointer-events: none; opacity: 0.07; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+@media (prefers-reduced-motion: reduce) { body::before { animation: none; } }
+
+/* Hero aurora fades into the page instead of ending on a hard edge */
+#smoke { -webkit-mask-image: linear-gradient(#000 62%, transparent 100%); mask-image: linear-gradient(#000 62%, transparent 100%); }
+.hero::after { display: none; }
+
+/* Section dividers: fading light lines */
+.section { border-top: 0; position: relative; }
+.section::before {
+  content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: min(var(--max), 100% - 32px); height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(148, 170, 255, 0.28), rgba(94, 234, 212, 0.35), rgba(148, 170, 255, 0.28), transparent);
+}
+
+/* ---------- Glass surfaces ---------- */
+.card, .service, .metric, .stats, .photo, .gallery figure, .cs-cover {
+  background: linear-gradient(180deg, rgba(17, 26, 52, 0.62), rgba(8, 13, 28, 0.62));
+  -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+  border-color: rgba(148, 170, 255, 0.13);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 24px 60px -36px rgba(0, 0, 0, 0.9);
+}
+.cover { background: rgba(6, 10, 22, 0.6); }
+.cover.logo, .cs-cover.logo { background: #fff; }
+.gallery figure img { background: #fff; }
+.card:hover, .service:hover {
+  border-color: rgba(94, 234, 212, 0.38);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07), 0 0 0 1px rgba(94, 234, 212, 0.08), 0 24px 70px -30px rgba(94, 234, 212, 0.28);
+}
+.stats { border-radius: 18px; }
+.stat { border-color: rgba(148, 170, 255, 0.12); }
+.service .ic { background: linear-gradient(135deg, rgba(94, 234, 212, 0.16), rgba(129, 140, 248, 0.14)); border-color: rgba(148, 170, 255, 0.2); }
+.service .ic svg { stroke: #dffaf5; }
+.chip, .tag { background: rgba(148, 170, 255, 0.07); border-color: rgba(148, 170, 255, 0.14); }
+.tl-row:hover { background: rgba(94, 234, 212, 0.04); }
+.nav.scrolled { background: rgba(5, 8, 19, 0.6); -webkit-backdrop-filter: blur(16px) saturate(1.3); backdrop-filter: blur(16px) saturate(1.3); }
+
+/* Contact: larger aurora glow behind the closing statement */
+.glow {
+  width: 1100px; height: 560px;
+  background:
+    radial-gradient(closest-side at 35% 50%, rgba(94, 234, 212, 0.16), transparent),
+    radial-gradient(closest-side at 65% 45%, rgba(129, 140, 248, 0.16), transparent),
+    radial-gradient(closest-side at 50% 70%, rgba(168, 85, 247, 0.10), transparent);
+  filter: blur(10px);
+}
+footer { border-top-color: rgba(148, 170, 255, 0.12); background: rgba(5, 8, 19, 0.55); }
+
+@media (max-width: 720px) {
+  .section { padding: 72px 0; }
+  .photo { justify-self: start; }
+  .cs-block { grid-template-columns: 1fr; }
+}
