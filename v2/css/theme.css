@@ -1,0 +1,67 @@
+/* v2 colour theme: same structure as the main site, midnight-blue palette with an aqua accent.
+   Loaded after ../css/style.css and only overrides colours and the hero background. */
+:root {
+  --bg: #050813;
+  --bg-2: #0a1020;
+  --card: #0b1222;
+  --fg: #eef2ff;
+  --muted: #94a0bf;
+  --faint: #5b6684;
+  --line: rgba(148, 170, 255, 0.11);
+  --line-strong: rgba(148, 170, 255, 0.22);
+  --accent: #5eead4;
+  --accent-2: #818cf8;
+}
+
+::selection { background: var(--accent); color: #031512; }
+
+/* Hero: aurora canvas + dot grid that lights up around the cursor */
+#smoke { opacity: 1; }
+.hero::before {
+  content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background-image: radial-gradient(rgba(190, 205, 255, 0.3) 1px, transparent 1.3px);
+  background-size: 26px 26px;
+  -webkit-mask-image: radial-gradient(520px circle at var(--mx, 50%) var(--my, 40%), #000 0%, rgba(0, 0, 0, 0.45) 45%, rgba(0, 0, 0, 0.2) 75%);
+          mask-image: radial-gradient(520px circle at var(--mx, 50%) var(--my, 40%), #000 0%, rgba(0, 0, 0, 0.45) 45%, rgba(0, 0, 0, 0.2) 75%);
+}
+.hero h1 { text-shadow: 0 6px 50px rgba(5, 8, 19, 0.75); }
+.hero h1 em { -webkit-text-stroke-color: rgba(214, 255, 248, 0.85); }
+.hero p { color: #c3cbe3; }
+.pill { background: rgba(8, 13, 28, 0.62); border-color: rgba(148, 170, 255, 0.24); color: #dbe2ff; }
+.brand-dot, .pulse { background: var(--accent); }
+.brand-dot { box-shadow: 0 0 14px var(--accent); }
+.pulse::after { border-color: var(--accent); }
+
+/* Surfaces that were hard-coded near-black in the main theme */
+.nav.scrolled { background: rgba(5, 8, 19, 0.74); }
+.nav-links.open { background: #0a1020; }
+.btn { background: rgba(148, 170, 255, 0.04); }
+.btn:hover { background: rgba(148, 170, 255, 0.09); border-color: rgba(148, 170, 255, 0.45); }
+.btn-primary { background: var(--fg); color: #050813; box-shadow: 0 0 30px rgba(94, 234, 212, 0.18); }
+.btn-primary:hover { background: #fff; box-shadow: 0 0 44px rgba(94, 234, 212, 0.35); }
+.cover { background: #070c18; }
+.cover.type { background: radial-gradient(120% 90% at 30% 20%, #16223f, #060a16); }
+.cover.type span { -webkit-text-stroke-color: rgba(190, 205, 255, 0.45); }
+.case-pill { background: rgba(6, 10, 22, 0.8); }
+.tag { background: rgba(148, 170, 255, 0.06); color: #cdd5ef; }
+.chip { background: #0d1529; color: #d4dbf3; }
+.photo { background: #0b1222; }
+.monogram { background: radial-gradient(110% 80% at 30% 20%, #1a2647, #070b17); -webkit-text-stroke-color: rgba(190, 205, 255, 0.5); }
+.service .ic { background: #111a31; }
+.service li { color: #b8c2df; }
+.stat b { background: linear-gradient(180deg, #fff, #b9c4ea); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.marquee-track span { color: #8d99ba; }
+.marquee-track img { filter: invert(0.62) sepia(0.2) hue-rotate(190deg); }
+
+/* Accent touches */
+.eyebrow::before { background: var(--accent); }
+.tl-row.now .when { color: var(--accent); }
+.card:hover .cover.type span { -webkit-text-stroke-color: var(--accent); }
+.glow { background: radial-gradient(closest-side, rgba(94, 234, 212, 0.12), rgba(129, 140, 248, 0.06), transparent); }
+.cs-block li::before { background: var(--accent); }
+.next a.big:hover { color: var(--accent); }
+
+/* Case-study page */
+.cs-cover, .gallery figure { background: #070c18; }
+.metric { background: var(--card); }
+.lightbox { background: rgba(3, 5, 12, 0.94); }

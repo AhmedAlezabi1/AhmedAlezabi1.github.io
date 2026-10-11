@@ -31,12 +31,15 @@ const ICON = {
   file: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9l-6-6Z"/><path d="M14 3v6h6"/></svg>',
 };
 
+// Pages in a subfolder (e.g. /v2/) set window.ASSET_BASE = "../" so shared asset paths still resolve.
+const ASSET_BASE = window.ASSET_BASE || "";
+const asset = (p) => (p && !/^(https?:|data:|mailto:)/.test(p) ? ASSET_BASE + p : p);
 const $ = (s) => document.querySelector(s);
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
 function coverHTML(p, cls = "cover") {
   if (p.coverStyle === "type") return `<div class="${cls} type"><span>${esc(p.coverText)}</span></div>`;
-  return `<div class="${cls} ${p.coverStyle === "logo" ? "logo" : ""}"><img src="${p.cover}" alt="${esc(p.title)}" loading="lazy" /></div>`;
+  return `<div class="${cls} ${p.coverStyle === "logo" ? "logo" : ""}"><img src="${asset(p.cover)}" alt="${esc(p.title)}" loading="lazy" /></div>`;
 }
 
 function renderHome() {
@@ -63,14 +66,14 @@ function renderHome() {
   $("#marquee").innerHTML = items + items; // duplicated for a seamless loop
 
   const photo = $("#photo");
-  if (PROFILE.photo) photo.src = PROFILE.photo;
+  if (PROFILE.photo) photo.src = asset(PROFILE.photo);
   else photo.replaceWith(Object.assign(document.createElement("div"), { className: "monogram", textContent: "AA" }));
 
   const links = [];
   if (PROFILE.email) links.push(`<a class="btn btn-primary" href="mailto:${esc(PROFILE.email)}">${ICON.mail}${esc(PROFILE.email)}</a>`);
   if (PROFILE.linkedin) links.push(`<a class="btn" href="${esc(PROFILE.linkedin)}" target="_blank" rel="noopener">${ICON.linkedin}LinkedIn</a>`);
   links.push(`<a class="btn ${PROFILE.email ? "" : "btn-primary"}" href="${esc(PROFILE.github)}" target="_blank" rel="noopener">${ICON.github}GitHub</a>`);
-  if (PROFILE.cv) links.push(`<a class="btn" href="${esc(PROFILE.cv)}" target="_blank" rel="noopener">${ICON.file}Download CV</a>`);
+  if (PROFILE.cv) links.push(`<a class="btn" href="${esc(asset(PROFILE.cv))}" target="_blank" rel="noopener">${ICON.file}Download CV</a>`);
   $("#contactLinks").innerHTML = links.join("");
 }
 
@@ -104,7 +107,7 @@ function renderProject() {
       <div class="cs-block reveal"><h2>My contribution</h2>${list(p.contribution)}</div>
       <div class="cs-block reveal"><h2>Tech stack</h2><div class="tags" style="padding:0">${p.stack.map((t) => `<span class="tag">${esc(t)}</span>`).join("")}</div></div>
       <div class="cs-block reveal" style="grid-template-columns:1fr"><h2>Gallery</h2>
-        <div class="gallery">${p.gallery.map((g) => `<figure><img src="${g.src}" alt="${esc(g.caption)}" loading="lazy" /><figcaption>${esc(g.caption)}</figcaption></figure>`).join("")}</div>
+        <div class="gallery">${p.gallery.map((g) => `<figure><img src="${asset(g.src)}" alt="${esc(g.caption)}" loading="lazy" /><figcaption>${esc(g.caption)}</figcaption></figure>`).join("")}</div>
       </div>
       <div class="hero-actions reveal" style="justify-content:flex-start;margin-top:48px">${p.links.map((l, i) =>
         `<a class="btn ${i === 0 ? "btn-primary" : ""}" href="${l.url}" target="_blank" rel="noopener">${i === 0 ? ICON.github : ""}${esc(l.label)}${ICON.arrow}</a>`).join("")}</div>
