@@ -264,3 +264,58 @@ footer a:hover { color: var(--fg); }
   .cs-meta { grid-template-columns: repeat(2, 1fr); }
   .scroll-hint .line { width: 48px; }
 }
+
+/* ---------- Scale: slightly "zoomed out" (~15% smaller type and spacing) ---------- */
+:root { --max: 1160px; --radius: 16px; }
+body { font-size: 15px; }
+.nav .wrap { height: 64px; }
+.brand { font-size: 17px; }
+.nav-links { font-size: 13.5px; gap: 26px; }
+.btn { padding: 10px 19px; font-size: 13.5px; }
+.section { padding: 96px 0; }
+.eyebrow { font-size: 12px; margin-bottom: 14px; }
+.h2 { font-size: clamp(32px, 4.4vw, 54px); }
+.lead { font-size: 15.5px; max-width: 520px; }
+.section-head { margin-bottom: 44px; }
+.hero { padding: 100px 0 64px; }
+.hero h1 { font-size: clamp(40px, 6.6vw, 88px); margin: 22px auto 20px; max-width: 900px; }
+.hero p { font-size: 16px; max-width: 520px; }
+.hero-actions { margin-top: 28px; }
+.scroll-hint { margin-top: 52px; }
+.marquee { margin-top: 44px; }
+.pill { font-size: 12.5px; padding: 7px 14px; }
+.grid { gap: 16px; }
+.card-body { padding: 18px 20px 22px; }
+.card h3 { font-size: 19px; }
+.card p { font-size: 14px; }
+.case-pill { font-size: 12.5px; padding: 10px; }
+.about { gap: 56px; }
+.about .bio { font-size: 15.5px; }
+.chips { margin: 24px 0; padding: 22px 0; }
+.chip { font-size: 12.5px; }
+.tl-row { font-size: 13.5px; padding: 13px 4px; }
+.photo { max-width: 440px; justify-self: end; width: 100%; }
+.stat { padding: 28px 24px; }
+.stat b { font-size: clamp(34px, 4vw, 48px); }
+.stat span { font-size: 13.5px; }
+.services { gap: 16px; }
+.service { padding: 24px 22px 26px; }
+.service h3 { font-size: 18px; }
+.service p { font-size: 14px; }
+.contact .h2 { font-size: clamp(40px, 6.6vw, 88px); }
+.cs-hero { padding: 120px 0 48px; }
+.cs-hero h1 { font-size: clamp(36px, 5.6vw, 72px); }
+.cs-hero .tagline { font-size: clamp(16px, 1.7vw, 19px); }
+.cs-meta { margin-top: 42px; }
+.metrics { margin-top: 48px; gap: 16px; }
+.metric { padding: 26px 22px; }
+.metric b { font-size: clamp(32px, 3.8vw, 46px); }
+.cs-block { padding: 52px 0; grid-template-columns: 220px 1fr; }
+.cs-block h2 { font-size: 22px; }
+.cs-block p, .cs-block li { font-size: 15.5px; }
+.next a.big { font-size: clamp(24px, 3.6vw, 42px); }
+@media (max-width: 1000px) { .photo { justify-self: start; } }
+@media (max-width: 720px) {
+  .section { padding: 72px 0; }
+  .cs-block { grid-template-columns: 1fr; }
+}
