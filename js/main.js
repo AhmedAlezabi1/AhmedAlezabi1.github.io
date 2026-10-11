@@ -121,6 +121,30 @@ function renderProject() {
   addEventListener("keydown", (e) => { if (e.key === "Escape") lb.classList.remove("open"); });
 }
 
+// Wrap every word of a headline in two spans so each word can slide up into view.
+function splitWords(elements) {
+  elements.forEach((el) => {
+    const walk = (node) => {
+      [...node.childNodes].forEach((n) => {
+        if (n.nodeType === 3) {
+          const frag = document.createDocumentFragment();
+          n.textContent.split(/(\s+)/).forEach((part) => {
+            if (!part) return;
+            if (/^\s+$/.test(part)) { frag.append(part); return; }
+            const w = document.createElement("span"); w.className = "w";
+            const inner = document.createElement("span"); inner.textContent = part;
+            w.append(inner); frag.append(w);
+          });
+          n.replaceWith(frag);
+        } else if (n.nodeType === 1) walk(n);
+      });
+    };
+    walk(el);
+    el.classList.add("split");
+    el.querySelectorAll(".w > span").forEach((s, i) => { s.style.transitionDelay = `${i * 70}ms`; });
+  });
+}
+
 function chrome() {
   const nav = $("#nav");
   const onScroll = () => nav.classList.toggle("scrolled", scrollY > 20);
@@ -132,9 +156,11 @@ function chrome() {
   }
   const y = $("#year"); if (y) y.textContent = new Date().getFullYear();
 
+  splitWords(document.querySelectorAll(".hero h1, .h2, .cs-hero h1"));
+
   // Reveal-on-scroll based on element position, so content still shows where
   // IntersectionObserver misbehaves (some embedded or headless browsers).
-  let pending = [...document.querySelectorAll(".reveal")];
+  let pending = [...document.querySelectorAll(".reveal, .split")];
   pending.forEach((el, i) => { el.style.transitionDelay = `${(i % 3) * 70}ms`; });
   let ticking = false;
   const check = () => {

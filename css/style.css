@@ -233,6 +233,12 @@ footer a:hover { color: var(--fg); }
 .reveal.in { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
 
+/* Headlines appear word by word, sliding up, when scrolled into view */
+.split .w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.1em; margin-bottom: -0.1em; }
+.split .w > span { display: inline-block; transform: translateY(105%); transition: transform 1s cubic-bezier(.2, .8, .2, 1); }
+.split.in .w > span { transform: none; }
+@media (prefers-reduced-motion: reduce) { .split .w > span { transform: none; transition: none; } }
+
 /* ---------- Responsive ---------- */
 @media (max-width: 1000px) {
   .grid { grid-template-columns: repeat(2, 1fr); }
