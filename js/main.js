@@ -148,6 +148,29 @@ function splitWords(elements) {
   });
 }
 
+// Day / night toggle. Only pages that have the #themeToggle button use it.
+function themeToggle() {
+  const btn = $("#themeToggle");
+  if (!btn) return;
+  const root = document.documentElement;
+  const sync = () => {
+    const light = root.dataset.theme === "light";
+    btn.setAttribute("aria-label", light ? "Switch to night mode" : "Switch to day mode");
+    btn.setAttribute("aria-pressed", String(light));
+  };
+  sync();
+  let fadeTimer;
+  btn.addEventListener("click", () => {
+    root.classList.add("theme-fade");
+    clearTimeout(fadeTimer);
+    fadeTimer = setTimeout(() => root.classList.remove("theme-fade"), 500);
+    const light = root.dataset.theme !== "light";
+    if (light) root.dataset.theme = "light"; else delete root.dataset.theme;
+    try { localStorage.setItem("theme", light ? "light" : "dark"); } catch (e) {}
+    sync();
+  });
+}
+
 function chrome() {
   const nav = $("#nav");
   const onScroll = () => nav.classList.toggle("scrolled", scrollY > 20);
@@ -184,4 +207,5 @@ function chrome() {
 
 renderHome();
 renderProject();
+themeToggle();
 chrome();
