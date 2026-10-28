@@ -107,7 +107,7 @@ function renderProject() {
       <div class="cs-block reveal"><h2>My contribution</h2>${list(p.contribution)}</div>
       <div class="cs-block reveal"><h2>Tech stack</h2><div class="tags" style="padding:0">${p.stack.map((t) => `<span class="tag">${esc(t)}</span>`).join("")}</div></div>
       <div class="cs-block reveal" style="grid-template-columns:1fr"><h2>Gallery</h2>
-        <div class="gallery">${p.gallery.map((g) => `<figure><img src="${asset(g.src)}" alt="${esc(g.caption)}" loading="lazy" /><figcaption>${esc(g.caption)}</figcaption></figure>`).join("")}</div>
+        <div class="gallery">${p.gallery.map((g) => `<figure class="${g.tall ? "tall" : g.wide ? "wide" : ""}"><img src="${asset(g.src)}" alt="${esc(g.caption)}" loading="lazy" /><figcaption><b>${esc(g.caption)}</b>${g.desc ? `<span>${esc(g.desc)}</span>` : ""}</figcaption></figure>`).join("")}</div>
       </div>
       <div class="hero-actions reveal" style="justify-content:flex-start;margin-top:48px">${p.links.map((l, i) =>
         `<a class="btn ${i === 0 ? "btn-primary" : ""}" href="${l.url}" target="_blank" rel="noopener">${i === 0 ? ICON.github : ""}${esc(l.label)}${ICON.arrow}</a>`).join("")}</div>
