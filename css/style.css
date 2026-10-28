@@ -382,17 +382,3 @@ html[data-theme="light"] .theme-toggle .sun { display: block; }
 html[data-theme="light"] .theme-toggle .moon { display: none; }
 /* Smooth colour fade while switching (added briefly by JS) */
 html.theme-fade, html.theme-fade * { transition: background-color 0.45s ease, color 0.45s ease, border-color 0.45s ease, filter 0.45s ease, opacity 0.45s ease !important; }
-
-/* Gallery: captions with a short explanation; tall diagrams get a portrait frame */
-.gallery figcaption b { display: block; color: var(--fg); font-weight: 500; font-size: 14px; }
-.gallery figcaption span { display: block; margin-top: 4px; font-size: 13px; line-height: 1.55; color: var(--muted); }
-.gallery figure.tall img { aspect-ratio: 3 / 4; padding: 14px; }
-.gallery:has(figure.tall) { grid-template-columns: repeat(6, 1fr); }
-.gallery:has(figure.tall) figure { grid-column: span 3; }
-.gallery:has(figure.tall) figure.tall { grid-column: span 2; }
-.gallery:has(figure.tall) figure.wide { grid-column: span 6; }
-.gallery figure.wide img { aspect-ratio: 16 / 7.7; }
-@media (max-width: 720px) { .gallery:has(figure.tall) { grid-template-columns: 1fr; } .gallery:has(figure.tall) figure, .gallery:has(figure.tall) figure.tall, .gallery:has(figure.tall) figure.wide { grid-column: auto; } }
-.stat a { color: inherit; display: block; }
-.stat a:hover span { color: var(--fg); }
-.stat small.src { display: block; margin-top: 6px; font-size: 11.5px; color: var(--faint); letter-spacing: .02em; }
