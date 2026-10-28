@@ -40,6 +40,8 @@ const PROJECTS = [
       { src: "assets/cv4/inference_feedback.png", caption: "Human-in-the-loop feedback: researchers correct predictions" },
       { src: "assets/cv4/deployment_pipeline.drawio.png", caption: "Deployment architecture" },
       { src: "assets/cv4/model_training_pipeline.drawio.png", caption: "Model training pipeline on Azure ML" },
+      { src: "assets/cv4/azure_sweep.png", caption: "Hyperparameter sweep on Azure ML: 10 training runs compared on validation F1" },
+      { src: "assets/cv4/azure_pipeline.png", caption: "Training pipeline running in Azure ML: preprocess, train, evaluate, register" },
     ],
     links: [
       { label: "View code on GitHub", url: `${GITHUB}/root-segmentation-cv4` },
