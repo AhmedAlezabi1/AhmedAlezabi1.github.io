@@ -382,3 +382,9 @@ html[data-theme="light"] .theme-toggle .sun { display: block; }
 html[data-theme="light"] .theme-toggle .moon { display: none; }
 /* Smooth colour fade while switching (added briefly by JS) */
 html.theme-fade, html.theme-fade * { transition: background-color 0.45s ease, color 0.45s ease, border-color 0.45s ease, filter 0.45s ease, opacity 0.45s ease !important; }
+
+/* Main page stats band with 3 items */
+.stats.stats-3 { grid-template-columns: repeat(3, 1fr); }
+.stats.stats-3 .stat:nth-child(2) { border-right: 1px solid var(--line); }
+.stats.stats-3 .stat:last-child { border-right: 0; }
+@media (max-width: 720px) { .stats.stats-3 { grid-template-columns: 1fr; } .stats.stats-3 .stat { border-right: 0; border-bottom: 1px solid var(--line); } .stats.stats-3 .stat:last-child { border-bottom: 0; } }
