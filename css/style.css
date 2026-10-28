@@ -388,3 +388,7 @@ html.theme-fade, html.theme-fade * { transition: background-color 0.45s ease, co
 .stats.stats-3 .stat:nth-child(2) { border-right: 1px solid var(--line); }
 .stats.stats-3 .stat:last-child { border-right: 0; }
 @media (max-width: 720px) { .stats.stats-3 { grid-template-columns: 1fr; } .stats.stats-3 .stat { border-right: 0; border-bottom: 1px solid var(--line); } .stats.stats-3 .stat:last-child { border-bottom: 0; } }
+
+/* Services header: sentence sits directly under the heading */
+.section-head--stacked { flex-direction: column; align-items: flex-start; gap: 14px; }
+.section-head--stacked .lead { margin-top: 0; max-width: 560px; }
