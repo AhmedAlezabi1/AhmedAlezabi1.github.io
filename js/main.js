@@ -1,10 +1,10 @@
 // ===== Personal details: edit these =====
 // Links left empty ("") are hidden, so the site never shows a placeholder.
 const PROFILE = {
-  email: "",      // e.g. "you@gmail.com"
+  email: "nasrhamed523@gmail.com",
   linkedin: "",   // e.g. "https://www.linkedin.com/in/your-name"
   github: "https://github.com/AhmedAlezabi1",
-  cv: "",         // e.g. "assets/Ahmed_Alezabi_CV.pdf"
+  cv: "assets/Ahmed_Alezabi_CV.pdf",
   photo: "",      // e.g. "assets/ahmed.jpg" (portrait, about 800×1000). Empty shows an "AA" monogram.
 };
 
